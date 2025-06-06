@@ -5,11 +5,27 @@ Module enables and configures resources needed for ISO 27001 compliance
 
 ```hcl
 module "iso27001" {
-    source  = "registry.infrahouse.com/infrahouse/iso27001/aws
-    version = "0.4.0"
+  source  = "registry.infrahouse.com/infrahouse/iso27001/aws
+  version = "0.4.0"
 
-    configure_password_policy = true
-    notification_email        = "nG2wG@example.com"
+  primary_contact = {
+    address_line_1     = "123 Any Street"
+    city               = "Seattle"
+    company_name       = "Example Corp, Inc."
+    country_code       = "US"
+    district_or_county = "King"
+    full_name          = "My Name"
+    phone_number       = "+64211111111"
+    postal_code        = "98101"
+    state_or_region    = "WA"
+    website_url        = "https://www.examplecorp.com"
+  }
+  security_contact = {
+    name          = "Example"
+    title         = "Example"
+    email_address = "test@example.com"
+    phone_number  = "+1234567890"
+  }
 }
 ```
 ## Requirements
