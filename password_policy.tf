@@ -1,5 +1,5 @@
 resource "aws_iam_account_password_policy" "strict" {
-  count                          = var.configure_password_policy ? 1 : 0
+  count                          = data.aws_region.current.name == "us-east-1" ? 1 : 0
   minimum_password_length        = 21
   require_lowercase_characters   = true
   require_numbers                = true
