@@ -13,9 +13,9 @@ module "iso27001" {
     website_url        = "https://www.examplecorp.com"
   }
   security_contact = {
-    name          = "Example"
-    title         = "Example"
-    email_address = "test@example.com"
-    phone_number  = "+1234567890"
+    full_name    = "Security Team"
+    title        = "Security Officer"
+    email        = "security@example.com"
+    phone_number = "+1234567890"
   }
 }
