@@ -21,7 +21,7 @@ Supports AWS provider versions ~> 5.62 and ~> 6.0
 ```hcl
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws
-  version = "1.2.1"
+  version = "1.3.0"
 
   primary_contact = {
     address_line_1     = "123 Any Street"
