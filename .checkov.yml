@@ -17,11 +17,6 @@ skip-check:
   # Same as CKV_TF_1 - Renovate handles module version updates.
   - CKV_TF_2
 
-  # CKV_AWS_275: AWSControlTowerExecution role requires AdministratorAccess.
-  # This is the standard Control Tower execution role used by AWS Control Tower
-  # service roles for account provisioning and management.
-  - CKV_AWS_275
-
   # CKV_AWS_111: InfraHouseLogRetention policy uses "*" resource for logs:PutRetentionPolicy.
   # This role enforces log retention across ALL log groups in the account.
   # Scoping to specific log group ARNs would defeat the purpose.

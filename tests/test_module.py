@@ -13,7 +13,7 @@ from tests.conftest import (
 
 
 @pytest.mark.parametrize(
-    "aws_provider_version", ["~> 5.62", "~> 6.0"], ids=["aws-5", "aws-6"]
+    "aws_provider_version", ["~> 6.0"], ids=["aws-6"]
 )
 def test_module(
     test_role_arn,
@@ -39,6 +39,7 @@ def test_module(
     with open(osp.join(terraform_module_dir, "terraform.tfvars"), "w") as fp:
         fp.write(dedent(f"""
                     region              = "{aws_region}"
+                    regions             = ["{aws_region}"]
                     """))
         if test_role_arn:
             fp.write(dedent(f"""

@@ -1,5 +1,4 @@
 resource "aws_account_primary_contact" "this" {
-  count              = data.aws_region.current.name == "us-east-1" ? 1 : 0
   address_line_1     = var.primary_contact.address_line_1
   address_line_2     = var.primary_contact.address_line_2
   address_line_3     = var.primary_contact.address_line_3
@@ -15,7 +14,6 @@ resource "aws_account_primary_contact" "this" {
 }
 
 resource "aws_account_alternate_contact" "security" {
-  count                  = data.aws_region.current.name == "us-east-1" ? 1 : 0
   alternate_contact_type = "SECURITY"
   title                  = var.security_contact.title
   name                   = var.security_contact.full_name

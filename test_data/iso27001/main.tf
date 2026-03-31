@@ -1,5 +1,6 @@
 module "iso27001" {
-  source = "./../../"
+  source  = "./../../"
+  regions = var.regions
   primary_contact = {
     address_line_1     = "123 Any Street"
     city               = "Seattle"

@@ -1,4 +1,6 @@
-data "aws_vpcs" "aws-control-tower-VPC" {
+data "aws_vpcs" "aws_control_tower_vpc" {
+  for_each = toset(var.regions)
+  region   = each.key
   filter {
     name = "tag:Name"
     values = [
@@ -8,6 +10,7 @@ data "aws_vpcs" "aws-control-tower-VPC" {
 }
 
 resource "aws_default_security_group" "default" {
-  for_each = toset(data.aws_vpcs.aws-control-tower-VPC.ids)
-  vpc_id   = each.key
+  for_each = local.controltower_vpcs
+  vpc_id   = each.value.vpc_id
+  region   = each.value.region
 }
