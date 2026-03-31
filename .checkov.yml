@@ -1,0 +1,36 @@
+# Checkov configuration for terraform-aws-iso27001 module
+
+framework:
+  - terraform
+
+skip-path:
+  - test_data
+
+skip-check:
+  # CKV_TF_1: Module sources use version pins from private registry (registry.infrahouse.com)
+  # InfraHouse standard: exact version pinning from registry.infrahouse.com,
+  # which provides better maintainability than commit hash pinning.
+  # Renovate manages version version updates via individual PRs for explicit review.
+  - CKV_TF_1
+
+  # CKV_TF_2: Module sources use version pins from private registry
+  # Same as CKV_TF_1 - Renovate handles module version updates.
+  - CKV_TF_2
+
+  # CKV_AWS_275: AWSControlTowerExecution role requires AdministratorAccess.
+  # This is the standard Control Tower execution role used by AWS Control Tower
+  # service roles for account provisioning and management.
+  - CKV_AWS_275
+
+  # CKV_AWS_111: InfraHouseLogRetention policy uses "*" resource for logs:PutRetentionPolicy.
+  # This role enforces log retention across ALL log groups in the account.
+  # Scoping to specific log group ARNs would defeat the purpose.
+  - CKV_AWS_111
+
+  # CKV_AWS_356: InfraHouseLogRetention policy uses "*" resource for restrictable actions.
+  # logs:DescribeLogGroups and logs:PutRetentionPolicy must operate on all log groups
+  # to enforce retention policies org-wide.
+  - CKV_AWS_356
+
+compact: true
+quiet: false
