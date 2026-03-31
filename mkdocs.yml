@@ -1,4 +1,4 @@
-site_name: InfraHouse terraform-aws-iso27001
+site_name: InfraHouse iso27001
 site_url: https://infrahouse.github.io/terraform-aws-iso27001/
 site_description: Terraform module documentation
 site_author: InfraHouse
@@ -61,6 +61,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - glightbox
   - minify:
       minify_html: true
 

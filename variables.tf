@@ -1,3 +1,8 @@
+variable "regions" {
+  description = "List of AWS regions to configure regional ISO 27001 controls in."
+  type        = list(string)
+}
+
 variable "primary_contact" {
   description = "Primary contact for the account."
   type = object(
