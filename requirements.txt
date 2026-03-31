@@ -1,2 +1,4 @@
-pytest-infrahouse ~= 0.10, >= 0.10.1
-infrahouse-core ~= 0.17, >= 0.17.2
+pytest-infrahouse ~= 0.24
+infrahouse-core ~= 0.28
+
+checkov ~= 3.2
