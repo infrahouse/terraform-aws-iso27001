@@ -26,3 +26,36 @@ resource "aws_iam_role_policy_attachment" "AdministratorAccess" {
   policy_arn = data.aws_iam_policy.AdministratorAccess.arn
   role       = aws_iam_role.AWSControlTowerExecution[count.index].name
 }
+
+data "aws_iam_policy_document" "InfraHouseLogRetention-trust" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    principals {
+      identifiers = ["arn:aws:iam::${data.aws_organizations_organization.current.master_account_id}:root"]
+      type        = "AWS"
+    }
+  }
+}
+
+data "aws_iam_policy_document" "InfraHouseLogRetention-permissions" {
+  statement {
+    actions = [
+      "logs:DescribeLogGroups",
+      "logs:PutRetentionPolicy",
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role" "InfraHouseLogRetention" {
+  count              = data.aws_region.current.name == "us-east-1" ? 1 : 0
+  name               = "InfraHouseLogRetention"
+  assume_role_policy = data.aws_iam_policy_document.InfraHouseLogRetention-trust.json
+}
+
+resource "aws_iam_role_policy" "InfraHouseLogRetention" {
+  count  = data.aws_region.current.name == "us-east-1" ? 1 : 0
+  name   = "InfraHouseLogRetention"
+  role   = aws_iam_role.InfraHouseLogRetention[count.index].name
+  policy = data.aws_iam_policy_document.InfraHouseLogRetention-permissions.json
+}
