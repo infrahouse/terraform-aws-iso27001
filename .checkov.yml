@@ -28,5 +28,17 @@ skip-check:
   # to enforce retention policies org-wide.
   - CKV_AWS_356
 
+  # CKV_AWS_9: Password expiration is no longer recommended by NIST SP 800-63B
+  # Section 3.1.1.2: "Verifiers and CSPs SHALL NOT require subscribers to change
+  # passwords periodically." MFA and IAM Identity Center are the preferred controls.
+  # https://pages.nist.gov/800-63-4/sp800-63b.html#password
+  - CKV_AWS_9
+
+  # CKV2_AWS_3: This check expects organization-level GuardDuty delegation (admin
+  # account + member enrollment). This module enables GuardDuty per member account,
+  # which is the correct pattern. Org-level delegation is handled separately in the
+  # management account.
+  - CKV2_AWS_3
+
 compact: true
 quiet: false
