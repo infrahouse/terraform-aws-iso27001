@@ -58,9 +58,10 @@ resource "aws_cloudwatch_event_rule" "guardduty_findings" {
 }
 
 resource "aws_sns_topic" "guardduty_notifications" {
-  for_each    = toset(var.regions)
-  name_prefix = "guardduty-"
-  region      = each.key
+  for_each          = toset(var.regions)
+  name_prefix       = "guardduty-"
+  kms_master_key_id = "alias/aws/sns"
+  region            = each.key
 }
 
 resource "aws_sns_topic_subscription" "guardduty_emails" {
