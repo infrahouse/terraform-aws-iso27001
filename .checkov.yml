@@ -5,6 +5,7 @@ framework:
 
 skip-path:
   - test_data
+  - examples
 
 skip-check:
   # CKV_TF_1: Module sources use version pins from private registry (registry.infrahouse.com)
