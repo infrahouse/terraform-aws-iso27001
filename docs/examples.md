@@ -5,7 +5,7 @@
 ```hcl
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws"
-  version = "2.0.0"
+  version = "2.0.1"
 
   regions = ["us-east-1"]
 
@@ -33,7 +33,7 @@ module "iso27001" {
 ```hcl
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws"
-  version = "2.0.0"
+  version = "2.0.1"
 
   regions = [
     "us-east-1",
@@ -70,7 +70,7 @@ management account for centralized log retention enforcement:
 # In each member account
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws"
-  version = "2.0.0"
+  version = "2.0.1"
 
   regions = ["us-east-1", "us-west-2"]
 
