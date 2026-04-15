@@ -18,14 +18,15 @@ skip-check:
   # Same as CKV_TF_1 - Renovate handles module version updates.
   - CKV_TF_2
 
-  # CKV_AWS_111: InfraHouseLogRetention policy uses "*" resource for logs:PutRetentionPolicy.
-  # This role enforces log retention across ALL log groups in the account.
-  # Scoping to specific log group ARNs would defeat the purpose.
+  # CKV_AWS_111: InfraHouseLogRetention policy uses "*" resource for write-without-constraints actions.
+  # This role enforces log retention and tags Control Tower-managed log groups (for Vanta exclusion)
+  # across ALL log groups in the account. Scoping to specific log group ARNs would defeat the purpose.
   - CKV_AWS_111
 
   # CKV_AWS_356: InfraHouseLogRetention policy uses "*" resource for restrictable actions.
-  # logs:DescribeLogGroups and logs:PutRetentionPolicy must operate on all log groups
-  # to enforce retention policies org-wide.
+  # logs:DescribeLogGroups, logs:PutRetentionPolicy, logs:ListTagsForResource, logs:TagResource,
+  # and logs:UntagResource must operate on all log groups to enforce retention and tagging org-wide.
+  # Note: logs:DescribeLogGroups does not support resource-level permissions at all.
   - CKV_AWS_356
 
   # CKV_AWS_9: Password expiration is no longer recommended by NIST SP 800-63B

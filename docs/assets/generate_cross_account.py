@@ -172,7 +172,7 @@ elements.append(member_title)
 
 # IAM Role box
 role_box = make_rect(
-    "role_box", 490, 70, 260, 95,
+    "role_box", 490, 70, 260, 110,
     bg="#ffe3e3", stroke_width=2, roundness={"type": 3},
     bound_elements=[
         {"id": "role_label", "type": "text"},
@@ -184,7 +184,7 @@ elements.append(role_box)
 
 role_label = make_text(
     "role_label", 0, 0,
-    "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy",
+    "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy\nlogs:{Tag,Untag,ListTagsFor}…",
     font_size=13, container_id="role_box", vertical_align="middle",
 )
 elements.append(role_label)

@@ -42,7 +42,8 @@ controls in a single deployment:
 - **S3 Public Access Block**: Prevents public access to S3 buckets at the account level
 - **VPC Security**: Configures default security groups to deny all traffic
 - **Log Retention Role**: Creates a least-privilege IAM role for cross-account
-  CloudWatch log retention enforcement
+  CloudWatch log retention enforcement and log-group tagging (e.g. Vanta
+  exclusion of Control Tower-managed groups)
 
 ## Quick Start
 
@@ -118,7 +119,7 @@ Apache 2.0 -- see [LICENSE](LICENSE).
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.38.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0, < 7.0 |
 
 ## Modules
 

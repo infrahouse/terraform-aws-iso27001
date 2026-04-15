@@ -52,8 +52,14 @@ resource "aws_ebs_encryption_by_default" "this" {
 The `InfraHouseLogRetention` IAM role is designed for use with
 [terraform-aws-org-governance](https://github.com/infrahouse/terraform-aws-org-governance).
 The trust policy allows the management account root to assume it. The
-permissions are scoped to `logs:DescribeLogGroups` and
-`logs:PutRetentionPolicy` only.
+permissions are scoped to `logs:DescribeLogGroups`,
+`logs:PutRetentionPolicy`, `logs:ListTagsForResource`, `logs:TagResource`,
+and `logs:UntagResource` only — enough to enforce retention policies and to
+tag Control Tower-managed log groups (e.g. for Vanta exclusion) without
+granting read access to log events. The tagging permissions exist because
+Control Tower-managed log groups are blocked from retention changes by the
+`GRLOGGROUPPOLICY` SCP, so the org-governance Lambda tags them with
+`VantaNoAlert=true` to mark them out of scope for Vanta's retention test.
 
 ![Cross-Account Log Retention](assets/cross-account-log-retention.svg)
 

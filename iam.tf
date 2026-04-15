@@ -9,10 +9,19 @@ data "aws_iam_policy_document" "InfraHouseLogRetention-trust" {
 }
 
 data "aws_iam_policy_document" "InfraHouseLogRetention-permissions" {
+  # Resource = "*" because this role must operate on every log group in the
+  # account (retention enforcement + Vanta-exclusion tagging of Control
+  # Tower-managed groups). logs:DescribeLogGroups does not support
+  # resource-level permissions; the other actions cover only log-group ARNs
+  # in this account by definition. See .checkov.yml for CKV_AWS_111 /
+  # CKV_AWS_356 suppressions.
   statement {
     actions = [
       "logs:DescribeLogGroups",
+      "logs:ListTagsForResource",
       "logs:PutRetentionPolicy",
+      "logs:TagResource",
+      "logs:UntagResource",
     ]
     resources = ["*"]
   }
