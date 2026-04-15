@@ -266,16 +266,16 @@
         ]
       ],
       "startBinding": {
-        "mode": "orbit",
         "elementId": "lambda_box",
+        "mode": "orbit",
         "fixedPoint": [
           0.5001,
           0.5001
         ]
       },
       "endBinding": {
-        "mode": "orbit",
         "elementId": "cw_box",
+        "mode": "orbit",
         "fixedPoint": [
           0.5001,
           0.5001
@@ -290,10 +290,10 @@
     {
       "id": "member_frame",
       "type": "rectangle",
-      "x": 459,
-      "y": 20,
-      "width": 320,
-      "height": 220,
+      "x": 461,
+      "y": 25,
+      "width": 311.50000000000017,
+      "height": 257.5,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ebfbee",
       "fillStyle": "solid",
@@ -303,7 +303,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 515,
-      "version": 3,
+      "version": 615,
       "isDeleted": false,
       "boundElements": [
         {
@@ -319,15 +319,15 @@
         "type": 3
       },
       "index": "a7",
-      "updated": 1775002887109,
-      "versionNonce": 978233128
+      "updated": 1776287919415,
+      "versionNonce": 928279740
     },
     {
       "id": "member_title",
       "type": "text",
-      "x": 564.5416679382324,
-      "y": 25,
-      "width": 108.91666412353516,
+      "x": 562.2666664123536,
+      "y": 30,
+      "width": 108.96666717529297,
       "height": 17.5,
       "text": "Member Account",
       "originalText": "Member Account",
@@ -344,7 +344,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 517,
-      "version": 8,
+      "version": 578,
       "isDeleted": false,
       "boundElements": [],
       "link": null,
@@ -357,16 +357,16 @@
       "lineHeight": 1.25,
       "baseline": 12,
       "index": "a8",
-      "updated": 1775002887109,
-      "versionNonce": 2126744664
+      "updated": 1776287919415,
+      "versionNonce": 673150268
     },
     {
       "id": "role_box",
       "type": "rectangle",
-      "x": 490,
-      "y": 70,
-      "width": 260,
-      "height": 95,
+      "x": 502,
+      "y": 68.5,
+      "width": 248.5,
+      "height": 108,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffe3e3",
       "fillStyle": "solid",
@@ -376,7 +376,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 519,
-      "version": 2,
+      "version": 399,
       "isDeleted": false,
       "boundElements": [
         {
@@ -400,18 +400,18 @@
         "type": 3
       },
       "index": "a9",
-      "updated": 1775002887109,
-      "versionNonce": 457146920
+      "updated": 1776287911744,
+      "versionNonce": 235497092
     },
     {
       "id": "role_label",
       "type": "text",
-      "x": 543.1333312988281,
-      "y": 93.125,
-      "width": 153.73333740234375,
-      "height": 48.75,
-      "text": "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy",
-      "originalText": "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy",
+      "x": 527.1500015258789,
+      "y": 90,
+      "width": 198.1999969482422,
+      "height": 65,
+      "text": "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy\nlogs:{Tag,Untag,ListTagsFor}…",
+      "originalText": "InfraHouseLogRetention\nlogs:DescribeLogGroups\nlogs:PutRetentionPolicy\nlogs:{Tag,Untag,ListTagsFor}…",
       "fontSize": 13,
       "fontFamily": 5,
       "textAlign": "center",
@@ -425,7 +425,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 521,
-      "version": 7,
+      "version": 416,
       "isDeleted": false,
       "boundElements": [],
       "link": null,
@@ -438,14 +438,14 @@
       "lineHeight": 1.25,
       "baseline": 11,
       "index": "aA",
-      "updated": 1775002887110,
-      "versionNonce": 876626264
+      "updated": 1776287911744,
+      "versionNonce": 815920644
     },
     {
       "id": "member_cw_box",
       "type": "rectangle",
-      "x": 530,
-      "y": 180,
+      "x": 542,
+      "y": 211.5,
       "width": 180,
       "height": 45,
       "strokeColor": "#1e1e1e",
@@ -457,7 +457,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 523,
-      "version": 2,
+      "version": 251,
       "isDeleted": false,
       "boundElements": [
         {
@@ -477,14 +477,14 @@
         "type": 3
       },
       "index": "aB",
-      "updated": 1775002887109,
-      "versionNonce": 2136800552
+      "updated": 1776287915506,
+      "versionNonce": 1749933188
     },
     {
       "id": "member_cw_label",
       "type": "text",
-      "x": 570.8833351135254,
-      "y": 195,
+      "x": 582.8833351135254,
+      "y": 226.5,
       "width": 98.23332977294922,
       "height": 15,
       "text": "CloudWatch Logs",
@@ -502,7 +502,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 525,
-      "version": 7,
+      "version": 256,
       "isDeleted": false,
       "boundElements": [],
       "link": null,
@@ -515,16 +515,16 @@
       "lineHeight": 1.25,
       "baseline": 10,
       "index": "aC",
-      "updated": 1775002887110,
-      "versionNonce": 1650349656
+      "updated": 1776287915506,
+      "versionNonce": 1994894340
     },
     {
       "id": "arrow_logs",
       "type": "arrow",
-      "x": 620,
-      "y": 165,
-      "width": 0,
-      "height": 15,
+      "x": 629.3649526154842,
+      "y": 182.5,
+      "width": 1.2105080825192545,
+      "height": 23.49999999999997,
       "strokeColor": "#2b8a3e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
@@ -534,7 +534,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 527,
-      "version": 1,
+      "version": 646,
       "isDeleted": false,
       "boundElements": [],
       "link": null,
@@ -549,21 +549,21 @@
           0
         ],
         [
-          0,
-          15
+          1.2105080825192545,
+          23.49999999999997
         ]
       ],
       "startBinding": {
-        "mode": "orbit",
         "elementId": "role_box",
+        "mode": "orbit",
         "fixedPoint": [
           0.5001,
           0.5001
         ]
       },
       "endBinding": {
-        "mode": "orbit",
         "elementId": "member_cw_box",
+        "mode": "orbit",
         "fixedPoint": [
           0.5001,
           0.5001
@@ -572,16 +572,17 @@
       "startArrowhead": null,
       "endArrowhead": "arrow",
       "elbowed": false,
-      "updated": 1775002785983,
-      "versionNonce": 528
+      "updated": 1776287915507,
+      "versionNonce": 1083935620,
+      "moveMidPointsWithElement": false
     },
     {
       "id": "arrow_assume",
       "type": "arrow",
       "x": 315,
-      "y": 120.70332907133631,
-      "width": 169,
-      "height": 0.40044668179321263,
+      "y": 121.63745598656098,
+      "width": 181,
+      "height": 0.8453222803874922,
       "strokeColor": "#e67700",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
@@ -591,7 +592,7 @@
       "opacity": 100,
       "angle": 0,
       "seed": 529,
-      "version": 2,
+      "version": 275,
       "isDeleted": false,
       "boundElements": [],
       "link": null,
@@ -606,31 +607,31 @@
           0
         ],
         [
-          169,
-          -0.40044668179321263
+          181,
+          0.8453222803874922
         ]
       ],
       "startBinding": {
-        "mode": "orbit",
         "elementId": "lambda_box",
+        "mode": "orbit",
         "fixedPoint": [
           0.5127218059530205,
           0.5127218059530207
         ]
       },
       "endBinding": {
-        "mode": "orbit",
         "elementId": "role_box",
+        "mode": "orbit",
         "fixedPoint": [
-          0.47371767115123037,
-          0.5262823288487695
+          0,
+          0.5001
         ]
       },
       "startArrowhead": null,
       "endArrowhead": "arrow",
       "elbowed": false,
-      "updated": 1775002871843,
-      "versionNonce": 1387075160,
+      "updated": 1776287855624,
+      "versionNonce": 1472187140,
       "moveMidPointsWithElement": false
     },
     {
