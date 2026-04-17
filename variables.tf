@@ -34,3 +34,9 @@ variable "security_contact" {
     }
   )
 }
+
+variable "malware_scan_events_retention_days" {
+  description = "Retention (in days) for the /aws/guardduty/malware-scan-events log group."
+  type        = number
+  default     = 365
+}
