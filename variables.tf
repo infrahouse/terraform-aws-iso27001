@@ -35,8 +35,25 @@ variable "security_contact" {
   )
 }
 
-variable "malware_scan_events_retention_days" {
-  description = "Retention (in days) for the /aws/guardduty/malware-scan-events log group."
+variable "guardduty_log_retention_days" {
+  description = <<-EOT
+    Retention (in days) applied to GuardDuty-owned CloudWatch log groups managed
+    by this module (currently /aws/guardduty/malware-scan-events). Default 365
+    satisfies the ISO 27001 retention standard. Must be a CloudWatch-Logs-supported
+    value.
+  EOT
   type        = number
   default     = 365
+
+  validation {
+    condition = contains(
+      [0, 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, 3653],
+      var.guardduty_log_retention_days
+    )
+    error_message = <<-EOT
+      guardduty_log_retention_days must be one of the CloudWatch Logs-supported values
+      (0, 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192,
+      2557, 2922, 3288, 3653). Got: ${var.guardduty_log_retention_days}.
+    EOT
+  }
 }

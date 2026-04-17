@@ -50,7 +50,7 @@ security_contact = {
 
 ## Optional Variables
 
-### `malware_scan_events_retention_days`
+### `guardduty_log_retention_days`
 
 Retention (in days) for the `/aws/guardduty/malware-scan-events` log group.
 GuardDuty creates this log group on-demand with a 90-day default; this module
@@ -58,7 +58,7 @@ takes ownership of it so the retention can be set explicitly. Default: `365`
 (ISO 27001 standard).
 
 ```hcl
-malware_scan_events_retention_days = 365
+guardduty_log_retention_days = 365
 ```
 
 ## Security Controls Applied
