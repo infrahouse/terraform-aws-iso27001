@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-04-17
+
+### Features
+
+- Manage /aws/guardduty/malware-scan-events retention
+
+### Miscellaneous Tasks
+
+- Suppress CKV_AWS_158 on malware-scan-events log group
+
+### Refactor
+
+- Address local review feedback on malware-scan-events log group
+
 ## [2.0.1] - 2026-04-15
 
 ### Features
