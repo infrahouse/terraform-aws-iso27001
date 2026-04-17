@@ -26,6 +26,11 @@ resource "aws_guardduty_detector_feature" "enabled" {
 # retention. We declare it explicitly so Terraform owns the retention setting (365 days
 # for ISO 27001). Pre-creating is safe — GuardDuty reuses an existing log group.
 resource "aws_cloudwatch_log_group" "malware_scan_events" {
+  # checkov:skip=CKV_AWS_158: GuardDuty creates this service-owned log group without
+  # a customer-managed KMS key (verified: kmsKeyId=null on GuardDuty-provisioned
+  # groups). Attaching a CMK here would diverge from GuardDuty's own posture for
+  # scan-metadata logs and introduce a key-policy dependency on the CloudWatch Logs
+  # service principal. The log group remains encrypted at rest with AWS-owned keys.
   for_each          = toset(var.regions)
   name              = "/aws/guardduty/malware-scan-events"
   retention_in_days = var.malware_scan_events_retention_days
