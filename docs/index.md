@@ -30,7 +30,7 @@ controls without requiring provider aliases.
 ```hcl
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws"
-  version = "2.0.1"
+  version = "2.1.0"
 
   regions = ["us-east-1", "us-west-2"]
 
