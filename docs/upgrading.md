@@ -9,7 +9,7 @@ default, which failed Vanta's retention check.
 
 - **New resource**: `aws_cloudwatch_log_group.malware_scan_events` (one per
   region in `var.regions`)
-- **New variable**: `malware_scan_events_retention_days` (number, default `365`)
+- **New variable**: `guardduty_log_retention_days` (number, default `365`)
 
 No breaking changes -- the variable has a sensible default and the resource
 is additive.
