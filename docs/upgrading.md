@@ -1,3 +1,52 @@
+# Upgrading to 2.1.0
+
+## What changed
+
+This release takes ownership of the `/aws/guardduty/malware-scan-events`
+CloudWatch log group to enforce 365-day retention (ISO 27001 standard).
+GuardDuty Malware Protection creates this log group on-demand with a 90-day
+default, which failed Vanta's retention check.
+
+- **New resource**: `aws_cloudwatch_log_group.malware_scan_events` (one per
+  region in `var.regions`)
+- **New variable**: `malware_scan_events_retention_days` (number, default `365`)
+
+No breaking changes -- the variable has a sensible default and the resource
+is additive.
+
+## Migration Steps
+
+### 1. Import existing log groups (per account, per region)
+
+If GuardDuty has already created the log group in an account/region, Terraform
+would try to recreate it on the next apply -- import it first. With AWS
+provider v6 per-resource `region`, set `AWS_REGION` to match the instance key:
+
+```shell
+for region in us-east-1 us-east-2 us-west-1 us-west-2; do
+  AWS_REGION=$region terraform import \
+    "module.iso27001.aws_cloudwatch_log_group.malware_scan_events[\"${region}\"]" \
+    /aws/guardduty/malware-scan-events
+done
+```
+
+If the log group doesn't exist in a given region, **skip the import for that
+region** -- `terraform apply` will create it with the configured retention.
+Import errors for missing log groups are expected and safe to ignore.
+
+### 2. Apply
+
+```shell
+terraform plan
+terraform apply
+```
+
+The plan should show:
+- `aws_cloudwatch_log_group.malware_scan_events["<region>"]` **updated in place**
+  (retention `90` → `365`) where the group was imported
+- `aws_cloudwatch_log_group.malware_scan_events["<region>"]` **created** where
+  GuardDuty hadn't yet instantiated it
+
 # Upgrading to 2.0.0
 
 ## Breaking Changes

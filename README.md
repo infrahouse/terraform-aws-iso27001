@@ -35,7 +35,8 @@ controls in a single deployment:
 ## Features
 
 - **Account Contacts**: Sets up primary and security contact information
-- **GuardDuty**: Enables threat detection with all detector features across all regions
+- **GuardDuty**: Enables threat detection with all detector features across all regions,
+  and enforces 365-day retention on the malware-scan events log group
 - **IAM Access Analyzer**: Monitors external access to your resources in every region
 - **Password Policy**: Enforces strong IAM password requirements (21 chars, all character types)
 - **EBS Encryption**: Enables encryption by default for all EBS volumes in every region
@@ -134,6 +135,7 @@ No modules.
 | [aws_account_primary_contact.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_primary_contact) | resource |
 | [aws_cloudwatch_event_rule.guardduty_findings](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
 | [aws_cloudwatch_event_target.guardduty_notify](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
+| [aws_cloudwatch_log_group.malware_scan_events](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_default_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
 | [aws_ebs_encryption_by_default.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_encryption_by_default) | resource |
 | [aws_guardduty_detector.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_detector) | resource |
@@ -159,6 +161,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_malware_scan_events_retention_days"></a> [malware\_scan\_events\_retention\_days](#input\_malware\_scan\_events\_retention\_days) | Retention (in days) for the /aws/guardduty/malware-scan-events log group. | `number` | `365` | no |
 | <a name="input_primary_contact"></a> [primary\_contact](#input\_primary\_contact) | Primary contact for the account. | <pre>object(<br/>    {<br/>      address_line_1     = string<br/>      address_line_2     = optional(string, null)<br/>      address_line_3     = optional(string, null)<br/>      city               = string<br/>      company_name       = string<br/>      country_code       = string<br/>      district_or_county = optional(string, null)<br/>      full_name          = string<br/>      phone_number       = string<br/>      postal_code        = string<br/>      state_or_region    = optional(string, null)<br/>      website_url        = optional(string, null)<br/>    }<br/>  )</pre> | n/a | yes |
 | <a name="input_regions"></a> [regions](#input\_regions) | List of AWS regions to configure regional ISO 27001 controls in. | `list(string)` | n/a | yes |
 | <a name="input_security_contact"></a> [security\_contact](#input\_security\_contact) | Security contact for the account. | <pre>object(<br/>    {<br/>      full_name    = string<br/>      phone_number = string<br/>      title        = string<br/>      email        = string<br/>    }<br/>  )</pre> | n/a | yes |

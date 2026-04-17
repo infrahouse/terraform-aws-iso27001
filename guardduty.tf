@@ -22,6 +22,16 @@ resource "aws_guardduty_detector_feature" "enabled" {
   region      = each.value.region
 }
 
+# GuardDuty creates /aws/guardduty/malware-scan-events on-demand with a 90-day default
+# retention. We declare it explicitly so Terraform owns the retention setting (365 days
+# for ISO 27001). Pre-creating is safe — GuardDuty reuses an existing log group.
+resource "aws_cloudwatch_log_group" "malware_scan_events" {
+  for_each          = toset(var.regions)
+  name              = "/aws/guardduty/malware-scan-events"
+  retention_in_days = var.malware_scan_events_retention_days
+  region            = each.key
+}
+
 # Separate resource to workaround a provider bug
 # https://github.com/hashicorp/terraform-provider-aws/issues/36400
 resource "aws_guardduty_detector_feature" "runtime_monitoring" {
