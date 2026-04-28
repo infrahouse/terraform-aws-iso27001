@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-04-28
+
+### Documentation
+
+- Regenerate terraform-docs block for new role + outputs
+- Update MkDocs pages for InfraHouseGovernance migration
+
+### Features
+
+- Add InfraHouseGovernance cross-account role
+
 ## [2.1.0] - 2026-04-17
 
 ### Features
