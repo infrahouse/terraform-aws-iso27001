@@ -1,3 +1,7 @@
+# DEPRECATED: InfraHouseLogRetention is superseded by InfraHouseGovernance
+# (see iam-governance.tf) and will be removed in the next major release of
+# this module. See https://github.com/infrahouse/terraform-aws-iso27001/issues/29
+# for the migration plan.
 data "aws_iam_policy_document" "InfraHouseLogRetention-trust" {
   statement {
     actions = ["sts:AssumeRole"]

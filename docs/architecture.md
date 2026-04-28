@@ -16,7 +16,8 @@ These are account-level and apply regardless of region:
 | `aws_account_alternate_contact` | Security contact |
 | `aws_iam_account_password_policy` | IAM password policy |
 | `aws_s3_account_public_access_block` | Block public S3 access |
-| `aws_iam_role` (InfraHouseLogRetention) | Cross-account log retention |
+| `aws_iam_role` (InfraHouseGovernance) | Cross-account governance (log retention + Lambda tagging) |
+| `aws_iam_role` (InfraHouseLogRetention) | Cross-account log retention (**deprecated** — superseded by InfraHouseGovernance) |
 | `aws_iam_role` (guardduty-publish) | EventBridge to SNS for GuardDuty |
 
 ### Regional Resources (created per region)
@@ -47,19 +48,38 @@ resource "aws_ebs_encryption_by_default" "this" {
 }
 ```
 
-## Cross-Account Log Retention
+## Cross-Account Governance Roles
 
-The `InfraHouseLogRetention` IAM role is designed for use with
+This module deploys two cross-account IAM roles intended for use with
 [terraform-aws-org-governance](https://github.com/infrahouse/terraform-aws-org-governance).
-The trust policy allows the management account root to assume it. The
-permissions are scoped to `logs:DescribeLogGroups`,
-`logs:PutRetentionPolicy`, `logs:ListTagsForResource`, `logs:TagResource`,
-and `logs:UntagResource` only — enough to enforce retention policies and to
-tag Control Tower-managed log groups (e.g. for Vanta exclusion) without
-granting read access to log events. The tagging permissions exist because
+Both trust the management account root.
+
+### `InfraHouseGovernance` (current)
+
+Scoped to the broader set of read+tag operations the org-governance Lambda
+needs. Permissions:
+
+- `logs:DescribeLogGroups`, `logs:PutRetentionPolicy`,
+  `logs:ListTagsForResource`, `logs:TagResource`, `logs:UntagResource` —
+  enforce retention policies and tag Control Tower-managed log groups
+  (e.g. for Vanta exclusion) without granting read access to log events.
+- `lambda:ListFunctions`, `lambda:ListTags`, `lambda:TagResource` — tag
+  Control Tower-managed Lambda functions with `VantaNoAlert=true` to mark
+  them out of scope for Vanta's inventory checks.
+
 Control Tower-managed log groups are blocked from retention changes by the
 `GRLOGGROUPPOLICY` SCP, so the org-governance Lambda tags them with
-`VantaNoAlert=true` to mark them out of scope for Vanta's retention test.
+`VantaNoAlert=true` instead. The same pattern applies to Control
+Tower-managed Lambda functions.
+
+### `InfraHouseLogRetention` (deprecated)
+
+Original log-retention-only role, kept in place during the migration to
+`InfraHouseGovernance`. Both roles are deployed together for one release
+cycle; `InfraHouseLogRetention` will be removed in the next major release.
+See
+[issue #29](https://github.com/infrahouse/terraform-aws-iso27001/issues/29)
+for the deprecation timeline and rationale.
 
 ![Cross-Account Log Retention](assets/cross-account-log-retention.svg)
 
