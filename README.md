@@ -56,7 +56,7 @@ controls in a single deployment:
 ```hcl
 module "iso27001" {
   source  = "registry.infrahouse.com/infrahouse/iso27001/aws"
-  version = "2.1.0"
+  version = "2.2.0"
 
   regions = ["us-east-1", "us-west-2"]
 
