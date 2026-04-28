@@ -54,6 +54,12 @@ confirmation from each region. Confirm it to receive GuardDuty findings.
 ## Multi-Account Setup
 
 In an AWS Organization, deploy this module in each member account. The module
-creates an `InfraHouseLogRetention` IAM role that trusts the management account,
-enabling centralized log retention enforcement via
+creates an `InfraHouseGovernance` IAM role that trusts the management account,
+enabling centralized log retention enforcement and Vanta-exclusion tagging of
+Control Tower-managed log groups and Lambda functions via
 [terraform-aws-org-governance](https://github.com/infrahouse/terraform-aws-org-governance).
+The legacy `InfraHouseLogRetention` role is also deployed for one release
+cycle to support migration; it is deprecated and will be removed in the next
+major release. See
+[issue #29](https://github.com/infrahouse/terraform-aws-iso27001/issues/29)
+for the migration plan.
