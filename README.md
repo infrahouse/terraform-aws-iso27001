@@ -42,9 +42,14 @@ controls in a single deployment:
 - **EBS Encryption**: Enables encryption by default for all EBS volumes in every region
 - **S3 Public Access Block**: Prevents public access to S3 buckets at the account level
 - **VPC Security**: Configures default security groups to deny all traffic
-- **Log Retention Role**: Creates a least-privilege IAM role for cross-account
-  CloudWatch log retention enforcement and log-group tagging (e.g. Vanta
-  exclusion of Control Tower-managed groups)
+- **Governance Role**: Creates a least-privilege IAM role
+  (`InfraHouseGovernance`) for cross-account CloudWatch log retention
+  enforcement, log-group tagging, and Lambda-function tagging (e.g. Vanta
+  exclusion of Control Tower-managed resources). The legacy
+  `InfraHouseLogRetention` role is also deployed and is **deprecated** —
+  it will be removed in the next major release. See
+  [issue #29](https://github.com/infrahouse/terraform-aws-iso27001/issues/29)
+  for the migration plan.
 
 ## Quick Start
 

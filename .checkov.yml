@@ -18,15 +18,18 @@ skip-check:
   # Same as CKV_TF_1 - Renovate handles module version updates.
   - CKV_TF_2
 
-  # CKV_AWS_111: InfraHouseLogRetention policy uses "*" resource for write-without-constraints actions.
-  # This role enforces log retention and tags Control Tower-managed log groups (for Vanta exclusion)
-  # across ALL log groups in the account. Scoping to specific log group ARNs would defeat the purpose.
+  # CKV_AWS_111: InfraHouseLogRetention and InfraHouseGovernance policies use "*" resource for
+  # write-without-constraints actions. These roles enforce log retention and tag Control Tower-managed
+  # log groups (for Vanta exclusion) across ALL log groups in the account; InfraHouseGovernance
+  # additionally tags Control Tower-managed Lambda functions with VantaNoAlert=true across ALL functions.
+  # Scoping to specific resource ARNs would defeat the purpose.
   - CKV_AWS_111
 
-  # CKV_AWS_356: InfraHouseLogRetention policy uses "*" resource for restrictable actions.
-  # logs:DescribeLogGroups, logs:PutRetentionPolicy, logs:ListTagsForResource, logs:TagResource,
-  # and logs:UntagResource must operate on all log groups to enforce retention and tagging org-wide.
-  # Note: logs:DescribeLogGroups does not support resource-level permissions at all.
+  # CKV_AWS_356: InfraHouseLogRetention and InfraHouseGovernance policies use "*" resource for
+  # restrictable actions. logs:DescribeLogGroups, logs:PutRetentionPolicy, logs:ListTagsForResource,
+  # logs:TagResource, logs:UntagResource, lambda:ListFunctions, lambda:ListTags, and lambda:TagResource
+  # must operate on all log groups / functions to enforce retention and tagging org-wide.
+  # Note: logs:DescribeLogGroups and lambda:ListFunctions do not support resource-level permissions at all.
   - CKV_AWS_356
 
   # CKV_AWS_9: Password expiration is no longer recommended by NIST SP 800-63B
