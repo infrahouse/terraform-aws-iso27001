@@ -72,4 +72,5 @@ guardduty_log_retention_days = 365
 | GuardDuty | Per region | All features enabled including runtime monitoring |
 | GuardDuty malware-scan log retention | Per region | 365-day retention on `/aws/guardduty/malware-scan-events` |
 | Default security groups | Per region | Deny all ingress and egress |
-| InfraHouseLogRetention role | Account | Trusts management account root |
+| InfraHouseGovernance role | Account | Trusts management account root; logs + lambda read/tag actions |
+| InfraHouseLogRetention role | Account | Trusts management account root (**deprecated**, removed in next major release) |

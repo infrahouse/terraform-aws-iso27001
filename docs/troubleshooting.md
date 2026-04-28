@@ -45,8 +45,9 @@ Error: reading AWS Organization: AccessDeniedException
 ```
 
 The module calls `data.aws_organizations_organization` to discover the
-management account ID (used for the InfraHouseLogRetention trust policy).
-The calling role needs `organizations:DescribeOrganization` permission.
+management account ID (used for the InfraHouseGovernance and
+InfraHouseLogRetention trust policies). The calling role needs
+`organizations:DescribeOrganization` permission.
 
 ### SNS subscription not confirmed
 
