@@ -32,6 +32,7 @@ def test_module(
     aws_region,
     aws_provider_version,
     iam_client,
+    vanta_external_id,
 ):
     terraform_module_dir = osp.join(TERRAFORM_ROOT_DIR, "iso27001")
     state_files = [
