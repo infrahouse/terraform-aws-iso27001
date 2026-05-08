@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2026-05-08
+
+### Features
+
+- Add Vanta auditor IAM role with SSM-backed external ID ([#31](https://github.com/infrahouse/terraform-aws-iso27001/issues/31))
+
 ## [2.2.0] - 2026-04-28
 
 ### Documentation
