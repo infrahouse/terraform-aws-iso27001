@@ -22,6 +22,10 @@ controls without requiring provider aliases.
 - **EBS Encryption** -- encryption by default for all EBS volumes, per region
 - **S3 Public Access Block** -- prevents public access at the account level
 - **VPC Security** -- default security groups deny all traffic
+- **Vanta Auditor Role** -- `vanta-auditor` IAM role for Vanta's compliance
+  scanner, with `SecurityAudit` and Identity Store read permissions. The
+  external ID is read from SSM parameter `/vanta/external_id` (distributed
+  by the org-governance StackSet).
 - **Governance Role** -- least-privilege `InfraHouseGovernance` IAM role
   for cross-account CloudWatch log retention enforcement, log-group tagging,
   and Lambda-function tagging (e.g. Vanta exclusion of Control Tower-managed

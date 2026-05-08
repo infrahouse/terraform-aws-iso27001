@@ -16,6 +16,7 @@ These are account-level and apply regardless of region:
 | `aws_account_alternate_contact` | Security contact |
 | `aws_iam_account_password_policy` | IAM password policy |
 | `aws_s3_account_public_access_block` | Block public S3 access |
+| `aws_iam_role` (vanta-auditor) | Vanta compliance scanner (SecurityAudit + Identity Store read) |
 | `aws_iam_role` (InfraHouseGovernance) | Cross-account governance (log retention + Lambda tagging) |
 | `aws_iam_role` (InfraHouseLogRetention) | Cross-account log retention (**deprecated** — superseded by InfraHouseGovernance) |
 | `aws_iam_role` (guardduty-publish) | EventBridge to SNS for GuardDuty |
@@ -47,6 +48,22 @@ resource "aws_ebs_encryption_by_default" "this" {
   region   = each.key
 }
 ```
+
+## Vanta Auditor Role
+
+The `vanta-auditor` IAM role allows Vanta's scanner
+(`arn:aws:iam::956993596390:role/scanner`) to audit the account. The trust
+policy requires an external ID read from SSM parameter `/vanta/external_id`,
+which is distributed to all member accounts by the org-governance StackSet.
+
+Attached policies:
+
+- **SecurityAudit** (AWS managed) — broad read-only access for compliance
+  scanning.
+- **VantaAdditionalPermissions** (custom) — Identity Store read actions
+  (`identitystore:Describe*`, `List*`, `Get*`, `IsMemberInGroups`) plus
+  explicit denies on `datapipeline:EvaluateExpression`,
+  `datapipeline:QueryObjects`, and `rds:DownloadDBLogFilePortion`.
 
 ## Cross-Account Governance Roles
 
