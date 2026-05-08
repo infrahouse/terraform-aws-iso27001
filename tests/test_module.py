@@ -81,8 +81,10 @@ def test_module(
 
         governance_role_name = tf_output["governance_role_name"]["value"]
         log_retention_role_name = tf_output["log_retention_role_name"]["value"]
+        vanta_role_name = tf_output["vanta_auditor_role_name"]["value"]
         assert governance_role_name == "InfraHouseGovernance"
         assert log_retention_role_name == "InfraHouseLogRetention"
+        assert vanta_role_name == "vanta-auditor"
 
         _assert_role_trusts_master_account(iam_client, governance_role_name)
         _assert_role_trusts_master_account(iam_client, log_retention_role_name)

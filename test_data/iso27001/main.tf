@@ -1,6 +1,13 @@
+resource "aws_ssm_parameter" "vanta_external_id" {
+  name  = "/vanta/external_id"
+  type  = "SecureString"
+  value = "test-external-id"
+}
+
 module "iso27001" {
-  source  = "./../../"
-  regions = var.regions
+  depends_on = [aws_ssm_parameter.vanta_external_id]
+  source     = "./../../"
+  regions    = var.regions
   primary_contact = {
     address_line_1     = "123 Any Street"
     city               = "Seattle"
@@ -27,6 +34,14 @@ output "governance_role_name" {
 
 output "governance_role_arn" {
   value = module.iso27001.governance_role_arn
+}
+
+output "vanta_auditor_role_name" {
+  value = module.iso27001.vanta_auditor_role_name
+}
+
+output "vanta_auditor_role_arn" {
+  value = module.iso27001.vanta_auditor_role_arn
 }
 
 output "log_retention_role_name" {
