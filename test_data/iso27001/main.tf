@@ -29,6 +29,14 @@ output "governance_role_arn" {
   value = module.iso27001.governance_role_arn
 }
 
+output "vanta_auditor_role_name" {
+  value = module.iso27001.vanta_auditor_role_name
+}
+
+output "vanta_auditor_role_arn" {
+  value = module.iso27001.vanta_auditor_role_arn
+}
+
 output "log_retention_role_name" {
   value = module.iso27001.log_retention_role_name
 }

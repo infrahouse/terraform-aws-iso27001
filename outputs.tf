@@ -8,6 +8,16 @@ output "governance_role_arn" {
   value       = aws_iam_role.InfraHouseGovernance.arn
 }
 
+output "vanta_auditor_role_name" {
+  description = "Name of the Vanta auditor IAM role."
+  value       = aws_iam_role.vanta_auditor.name
+}
+
+output "vanta_auditor_role_arn" {
+  description = "ARN of the Vanta auditor IAM role."
+  value       = aws_iam_role.vanta_auditor.arn
+}
+
 output "log_retention_role_name" {
   description = <<-EOT
     Name of the deprecated InfraHouseLogRetention cross-account IAM role.
