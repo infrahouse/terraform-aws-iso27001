@@ -83,6 +83,8 @@ needs. Permissions:
 - `lambda:ListFunctions`, `lambda:ListTags`, `lambda:TagResource` — tag
   Control Tower-managed Lambda functions with `VantaNoAlert=true` to mark
   them out of scope for Vanta's inventory checks.
+- `s3:ListAllMyBuckets`, `s3:GetBucketTagging` — read S3 bucket tags for
+  the Vanta S3 CRR exemption reconciler.
 
 Control Tower-managed log groups are blocked from retention changes by the
 `GRLOGGROUPPOLICY` SCP, so the org-governance Lambda tags them with

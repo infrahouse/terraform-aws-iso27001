@@ -37,6 +37,13 @@ data "aws_iam_policy_document" "InfraHouseGovernance-permissions" {
     ]
     resources = ["*"]
   }
+  statement {
+    actions = [
+      "s3:GetBucketTagging",
+      "s3:ListAllMyBuckets",
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role" "InfraHouseGovernance" {
