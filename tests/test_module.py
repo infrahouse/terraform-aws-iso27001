@@ -23,6 +23,10 @@ GOVERNANCE_LAMBDA_ACTIONS = {
     "lambda:ListTags",
     "lambda:TagResource",
 }
+GOVERNANCE_S3_ACTIONS = {
+    "s3:GetBucketTagging",
+    "s3:ListAllMyBuckets",
+}
 
 
 @pytest.mark.parametrize("aws_provider_version", ["~> 6.0"], ids=["aws-6"])
@@ -95,6 +99,7 @@ def test_module(
         )
         assert GOVERNANCE_LOGS_ACTIONS.issubset(governance_actions)
         assert GOVERNANCE_LAMBDA_ACTIONS.issubset(governance_actions)
+        assert GOVERNANCE_S3_ACTIONS.issubset(governance_actions)
 
         log_retention_actions = _collect_inline_policy_actions(
             iam_client, log_retention_role_name, log_retention_role_name
