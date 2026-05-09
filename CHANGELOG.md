@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2026-05-09
+
+### Bug Fixes
+
+- Add s3:GetBucketTagging to InfraHouseGovernance role
+
 ## [2.3.0] - 2026-05-08
 
 ### Features
