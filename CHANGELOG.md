@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2026-05-10
+
+### Features
+
+- Add s3-batch-replication IAM role for S3 Batch Replication jobs
+
 ## [2.3.1] - 2026-05-09
 
 ### Bug Fixes
