@@ -19,6 +19,7 @@ These are account-level and apply regardless of region:
 | `aws_iam_role` (vanta-auditor) | Vanta compliance scanner (SecurityAudit + Identity Store read) |
 | `aws_iam_role` (InfraHouseGovernance) | Cross-account governance (log retention + Lambda tagging) |
 | `aws_iam_role` (InfraHouseLogRetention) | Cross-account log retention (**deprecated** — superseded by InfraHouseGovernance) |
+| `aws_iam_role` (s3-batch-replication) | S3 Batch Replication jobs (backfill existing objects for CRR) |
 | `aws_iam_role` (guardduty-publish) | EventBridge to SNS for GuardDuty |
 
 ### Regional Resources (created per region)
@@ -101,6 +102,44 @@ See
 for the deprecation timeline and rationale.
 
 ![Cross-Account Log Retention](assets/cross-account-log-retention.svg)
+
+## S3 Batch Replication Role
+
+When Cross-Region Replication (CRR) is enabled on a bucket that previously had
+no versioning, existing objects are not replicated automatically — they remain
+in `NONE` replication status. S3 Batch Replication is needed to backfill them.
+
+The module creates an `s3-batch-replication` IAM role trusted by
+`batchoperations.s3.amazonaws.com` with the minimum permissions required:
+
+- `s3:GetReplicationConfiguration`, `s3:PutInventoryConfiguration` — bucket-level
+  actions needed by the batch job to read replication config and manage inventory.
+- `s3:InitiateReplication` — object-level action to trigger replication of
+  individual objects.
+
+Usage (after CRR is enabled):
+
+```bash
+aws s3control create-job \
+  --account-id "$ACCOUNT_ID" \
+  --operation '{"S3ReplicateObject":{}}' \
+  --manifest-generator "{
+    \"S3JobManifestGenerator\": {
+      \"ExpectedBucketOwner\": \"${ACCOUNT_ID}\",
+      \"SourceBucket\": \"arn:aws:s3:::${SOURCE_BUCKET}\",
+      \"EnableManifestOutput\": false,
+      \"Filter\": {
+        \"EligibleForReplication\": true,
+        \"ObjectReplicationStatuses\": [\"NONE\", \"FAILED\"]
+      }
+    }
+  }" \
+  --report '{"Enabled":false}' \
+  --priority 1 \
+  --role-arn "arn:aws:iam::${ACCOUNT_ID}:role/s3-batch-replication" \
+  --no-confirmation-required \
+  --region "$REGION"
+```
 
 ## Control Tower VPC Handling
 

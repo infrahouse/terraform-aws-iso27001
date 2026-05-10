@@ -33,6 +33,9 @@ controls without requiring provider aliases.
   is **deprecated** -- it will be removed in the next major release. See
   [issue #29](https://github.com/infrahouse/terraform-aws-iso27001/issues/29)
   for the migration plan.
+- **S3 Batch Replication Role** -- `s3-batch-replication` IAM role trusted by
+  `batchoperations.s3.amazonaws.com` for running S3 Batch Replication jobs to
+  backfill existing objects when Cross-Region Replication is enabled
 
 ## Quick Start
 
