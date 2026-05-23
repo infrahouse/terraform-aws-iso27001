@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2026-05-23
+
+### Features
+
+- Add CloudWatch capacity dashboard for Vanta CAP-7
+
 ## [2.4.0] - 2026-05-10
 
 ### Features
