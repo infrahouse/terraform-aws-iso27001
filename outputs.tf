@@ -18,6 +18,14 @@ output "vanta_auditor_role_arn" {
   value       = aws_iam_role.vanta_auditor.arn
 }
 
+output "capacity_dashboard_arns" {
+  description = "Map of region → CloudWatch capacity dashboard ARN."
+  value = {
+    for region, dashboard in aws_cloudwatch_dashboard.capacity :
+    region => dashboard.dashboard_arn
+  }
+}
+
 output "log_retention_role_name" {
   description = <<-EOT
     Name of the deprecated InfraHouseLogRetention cross-account IAM role.

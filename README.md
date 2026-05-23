@@ -142,6 +142,7 @@ No modules.
 | [aws_accessanalyzer_analyzer.external_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer) | resource |
 | [aws_account_alternate_contact.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_primary_contact.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_primary_contact) | resource |
+| [aws_cloudwatch_dashboard.capacity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_dashboard) | resource |
 | [aws_cloudwatch_event_rule.guardduty_findings](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
 | [aws_cloudwatch_event_target.guardduty_notify](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
 | [aws_cloudwatch_log_group.malware_scan_events](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
@@ -186,6 +187,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_capacity_dashboard_enabled"></a> [capacity\_dashboard\_enabled](#input\_capacity\_dashboard\_enabled) | Create a CloudWatch capacity-monitoring dashboard in each region.<br/>The dashboard auto-discovers EC2/ASG, RDS, ALB, Lambda, and SQS<br/>resources and displays the metrics checked by Vanta CAP-7<br/>(ISO 27001:2022 A.8.6). | `bool` | `true` | no |
+| <a name="input_capacity_dashboard_name_prefix"></a> [capacity\_dashboard\_name\_prefix](#input\_capacity\_dashboard\_name\_prefix) | Name prefix for the per-region CloudWatch capacity dashboard.<br/>The region is appended automatically, e.g. "capacity-monitoring-us-west-1". | `string` | `"capacity-monitoring"` | no |
 | <a name="input_guardduty_log_retention_days"></a> [guardduty\_log\_retention\_days](#input\_guardduty\_log\_retention\_days) | Retention (in days) applied to GuardDuty-owned CloudWatch log groups managed<br/>by this module (currently /aws/guardduty/malware-scan-events). Default 365<br/>satisfies the ISO 27001 retention standard. Must be a CloudWatch-Logs-supported<br/>value. | `number` | `365` | no |
 | <a name="input_primary_contact"></a> [primary\_contact](#input\_primary\_contact) | Primary contact for the account. | <pre>object(<br/>    {<br/>      address_line_1     = string<br/>      address_line_2     = optional(string, null)<br/>      address_line_3     = optional(string, null)<br/>      city               = string<br/>      company_name       = string<br/>      country_code       = string<br/>      district_or_county = optional(string, null)<br/>      full_name          = string<br/>      phone_number       = string<br/>      postal_code        = string<br/>      state_or_region    = optional(string, null)<br/>      website_url        = optional(string, null)<br/>    }<br/>  )</pre> | n/a | yes |
 | <a name="input_regions"></a> [regions](#input\_regions) | List of AWS regions to configure regional ISO 27001 controls in. | `list(string)` | n/a | yes |
@@ -195,6 +198,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_capacity_dashboard_arns"></a> [capacity\_dashboard\_arns](#output\_capacity\_dashboard\_arns) | Map of region → CloudWatch capacity dashboard ARN. |
 | <a name="output_governance_role_arn"></a> [governance\_role\_arn](#output\_governance\_role\_arn) | ARN of the InfraHouseGovernance cross-account IAM role. |
 | <a name="output_governance_role_name"></a> [governance\_role\_name](#output\_governance\_role\_name) | Name of the InfraHouseGovernance cross-account IAM role. |
 | <a name="output_log_retention_role_arn"></a> [log\_retention\_role\_arn](#output\_log\_retention\_role\_arn) | ARN of the deprecated InfraHouseLogRetention cross-account IAM role.<br/>Kept for migration to InfraHouseGovernance; will be removed in the next<br/>major release. |

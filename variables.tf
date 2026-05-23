@@ -35,6 +35,26 @@ variable "security_contact" {
   )
 }
 
+variable "capacity_dashboard_enabled" {
+  description = <<-EOT
+    Create a CloudWatch capacity-monitoring dashboard in each region.
+    The dashboard auto-discovers EC2/ASG, RDS, ALB, Lambda, and SQS
+    resources and displays the metrics checked by Vanta CAP-7
+    (ISO 27001:2022 A.8.6).
+  EOT
+  type        = bool
+  default     = true
+}
+
+variable "capacity_dashboard_name_prefix" {
+  description = <<-EOT
+    Name prefix for the per-region CloudWatch capacity dashboard.
+    The region is appended automatically, e.g. "capacity-monitoring-us-west-1".
+  EOT
+  type        = string
+  default     = "capacity-monitoring"
+}
+
 variable "guardduty_log_retention_days" {
   description = <<-EOT
     Retention (in days) applied to GuardDuty-owned CloudWatch log groups managed
