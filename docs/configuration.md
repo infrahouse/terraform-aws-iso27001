@@ -61,6 +61,36 @@ takes ownership of it so the retention can be set explicitly. Default: `365`
 guardduty_log_retention_days = 365
 ```
 
+### `runtime_monitoring`
+
+Controls which compute types get the GuardDuty Runtime Monitoring agent
+auto-deployed. Billed per vCPU-hour of monitored compute. Defaults preserve the
+historical behavior (EC2 on, EKS/Fargate off); enable EKS/Fargate only in
+accounts that run those workloads. See
+[GuardDuty: centralized vs per-account](guardduty.md) for guidance on avoiding
+drift when an organization manages GuardDuty centrally.
+
+```hcl
+runtime_monitoring = {
+  enable_ec2_agent_management         = true   # default
+  enable_eks_addon_management         = false  # default; true installs the GuardDuty EKS add-on
+  enable_ecs_fargate_agent_management = false  # default; true injects an agent sidecar into Fargate tasks
+}
+```
+
+### `create_guardduty_detector`
+
+Whether this module creates and manages the GuardDuty detector and its features
+in the account. Default `true`. Set to `false` in member accounts where GuardDuty
+is managed centrally by an organization delegated administrator — the organization
+auto-enable creates and owns the detector, so the module must not. The
+malware-scan log group and findings notification are managed regardless. See
+[GuardDuty: centralized vs per-account](guardduty.md).
+
+```hcl
+create_guardduty_detector = false
+```
+
 ## Security Controls Applied
 
 | Control | Scope | Details |
@@ -69,7 +99,7 @@ guardduty_log_retention_days = 365
 | EBS encryption | Per region | Enabled by default |
 | S3 public access block | Account | All four block settings enabled |
 | IAM Access Analyzer | Per region | External access analyzer |
-| GuardDuty | Per region | All features enabled including runtime monitoring |
+| GuardDuty | Per region | Detector + features enabled; runtime monitoring agent management configurable via `runtime_monitoring` (see [GuardDuty](guardduty.md)) |
 | GuardDuty malware-scan log retention | Per region | 365-day retention on `/aws/guardduty/malware-scan-events` |
 | Default security groups | Per region | Deny all ingress and egress |
 | Vanta auditor role | Account | `vanta-auditor` role with SecurityAudit + Identity Store read; external ID from SSM |
