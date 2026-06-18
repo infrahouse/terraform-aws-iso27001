@@ -1,11 +1,11 @@
 resource "aws_guardduty_detector" "main" {
-  for_each = toset(var.regions)
+  for_each = var.create_guardduty_detector ? toset(var.regions) : []
   enable   = true
   region   = each.key
 }
 
 resource "aws_guardduty_detector_feature" "enabled" {
-  for_each = {
+  for_each = var.create_guardduty_detector ? {
     for pair in setproduct(var.regions, [
       "S3_DATA_EVENTS",
       "EBS_MALWARE_PROTECTION",
@@ -15,7 +15,7 @@ resource "aws_guardduty_detector_feature" "enabled" {
       region = pair[0]
       name   = pair[1]
     }
-  }
+  } : {}
   detector_id = aws_guardduty_detector.main[each.value.region].id
   name        = each.value.name
   status      = "ENABLED"
@@ -25,22 +25,22 @@ resource "aws_guardduty_detector_feature" "enabled" {
 # Separate resource to workaround a provider bug
 # https://github.com/hashicorp/terraform-provider-aws/issues/36400
 resource "aws_guardduty_detector_feature" "runtime_monitoring" {
-  for_each    = toset(var.regions)
+  for_each    = var.create_guardduty_detector ? toset(var.regions) : []
   detector_id = aws_guardduty_detector.main[each.key].id
   name        = "RUNTIME_MONITORING"
   status      = "ENABLED"
   region      = each.key
   additional_configuration {
     name   = "EKS_ADDON_MANAGEMENT"
-    status = "DISABLED"
+    status = var.runtime_monitoring.enable_eks_addon_management ? "ENABLED" : "DISABLED"
   }
   additional_configuration {
     name   = "ECS_FARGATE_AGENT_MANAGEMENT"
-    status = "DISABLED"
+    status = var.runtime_monitoring.enable_ecs_fargate_agent_management ? "ENABLED" : "DISABLED"
   }
   additional_configuration {
     name   = "EC2_AGENT_MANAGEMENT"
-    status = "ENABLED"
+    status = var.runtime_monitoring.enable_ec2_agent_management ? "ENABLED" : "DISABLED"
   }
 }
 

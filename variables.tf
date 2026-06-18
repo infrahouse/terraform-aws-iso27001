@@ -77,3 +77,34 @@ variable "guardduty_log_retention_days" {
     EOT
   }
 }
+
+variable "runtime_monitoring" {
+  description = <<-EOT
+    GuardDuty Runtime Monitoring agent auto-management per compute type. The
+    GuardDuty agent is billed per vCPU-hour of monitored compute, so only enable
+    a compute type where you actually run it. Defaults preserve historical
+    behavior (EC2 on, EKS/Fargate off).
+
+    Note: enable_eks_addon_management=true installs the GuardDuty add-on into EKS
+    clusters, and enable_ecs_fargate_agent_management=true injects an agent sidecar
+    into Fargate tasks. Neither is a no-op where those workloads exist.
+  EOT
+  type = object({
+    enable_ec2_agent_management         = optional(bool, true)
+    enable_eks_addon_management         = optional(bool, false)
+    enable_ecs_fargate_agent_management = optional(bool, false)
+  })
+  default = {}
+}
+
+variable "create_guardduty_detector" {
+  description = <<-EOT
+    Create and manage the GuardDuty detector and its features in this account. Set
+    to false in member accounts where GuardDuty is managed centrally by an
+    organization delegated administrator (the organization auto-enable creates and
+    owns the detector). The malware-scan log group and findings-notification
+    resources are managed regardless of this setting.
+  EOT
+  type        = bool
+  default     = true
+}
