@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0] - 2026-06-18
+
+### Features
+
+- Make GuardDuty detector and runtime monitoring configurable
+
 ## [2.5.0] - 2026-05-23
 
 ### Features
